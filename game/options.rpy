@@ -6,8 +6,8 @@
 
     ## Дополнительные настройки окна
     config.default_fullscreen = False
-    config.window_icon = "gui/window_icon.png"
-    config.windows_icon = "gui/window_icon.png"
+    # config.window_icon = "images/misc/icon.png"
+    # config.windows_icon = "images/misc/icon.png"
 
     config.steam_appid = 1450150 #SteamID: 1450150, VK Play: 2018064
     config.developer = True

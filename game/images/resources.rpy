@@ -1,3 +1,16 @@
+init python:
+    import datetime
+
+    new_year_start_date = [2023, 12, 21]
+    new_year_end_date = [2024, 1, 4]
+
+    def is_event_sprite(start, end):
+        start_date = datetime.date( start[0], start[1], start[2] )
+        end_date = datetime.date( end[0], end[1], end[2] )
+
+        today = datetime.date.today()
+        return start_date <= today <= end_date
+
 init 1:
 
     #Позиции для диалогового меню
@@ -29,32 +42,73 @@ init 1:
     #Персонажи
 
     #Микки
-    image mickey_happy:
-        "images/sprites/mickey/mickey_happy.png"
-        zoom 1.1
-    image mickey_not_happy:
-        "images/sprites/mickey/mickey_not_happy.png"
-        zoom 1.1
-    image mickey_serious:
-        "images/sprites/mickey/mickey_serious.png"
-        zoom 1.1
-    image mickey_shouts:
-        "images/sprites/mickey/mickey_shouts.png"
-        zoom 1.1
-    image mickey_thinks:
-        "images/sprites/mickey/mickey_thinks.png"
-        zoom 1.1
+    if is_event_sprite(new_year_start_date, new_year_end_date): # mickey_happy
+        image mickey_happy:
+            "images/sprites/mickey/mickey_happy_yn.png"
+            zoom 1.1
+    else:
+        image mickey_happy:
+            "images/sprites/mickey/mickey_happy.png"
+            zoom 1.1
+
+    if is_event_sprite(new_year_start_date, new_year_end_date): # mickey_not_happy
+        image mickey_not_happy:
+            "images/sprites/mickey/mickey_not_happy_yn.png"
+            zoom 1.1
+    else:
+        image mickey_not_happy:
+            "images/sprites/mickey/mickey_not_happy.png"
+            zoom 1.1
+
+    if is_event_sprite(new_year_start_date, new_year_end_date): # mickey_serious
+        image mickey_serious:
+            "images/sprites/mickey/mickey_serious_yn.png"
+            zoom 1.1
+    else:
+        image mickey_serious:
+            "images/sprites/mickey/mickey_serious.png"
+            zoom 1.1
+
+    if is_event_sprite(new_year_start_date, new_year_end_date): # mickey_shouts
+        image mickey_shouts:
+            "images/sprites/mickey/mickey_shouts_yn.png"
+            zoom 1.1
+    else:
+        image mickey_shouts:
+            "images/sprites/mickey/mickey_shouts.png"
+            zoom 1.1
+
+    if is_event_sprite(new_year_start_date, new_year_end_date): # mickey_thinks
+        image mickey_thinks:
+            "images/sprites/mickey/mickey_thinks_yn.png"
+            zoom 1.1
+    else:
+        image mickey_thinks:
+            "images/sprites/mickey/mickey_thinks.png"
+            zoom 1.1
+
     image mickey_back:
         "images/sprites/mickey/mickey_back.png"
         zoom 1.1
 
-    #Загадочный  
-    image mysterious_normal:
-        "images/sprites/mysterious.png"
-        zoom 1.1
-    image mysterious_angry:
-        "images/sprites/mysterious_angry.png"
-        zoom 1.1
+    #Загадочный
+    if is_event_sprite(new_year_start_date, new_year_end_date): # mysterious_normal
+        image mysterious_normal:
+            "images/sprites/mysterious_yn.png"
+            zoom 1.1
+    else:
+        image mysterious_normal:
+            "images/sprites/mysterious.png"
+            zoom 1.1
+
+    if is_event_sprite(new_year_start_date, new_year_end_date): # mysterious_angry
+        image mysterious_angry:
+            "images/sprites/mysterious_angry_yn.png"
+            zoom 1.1
+    else:
+        image mysterious_angry:
+            "images/sprites/mysterious_angry.png"
+            zoom 1.1
 
     #Старик
     image old_man_normal:
@@ -131,12 +185,22 @@ init 1:
     image larry_back:
         "images/sprites/larry_back.png"
         zoom 1.1
-    image orderly_normal:
-        "images/sprites/orderly.png"
-        zoom 1.1
-    image dir_durka_normal:
-        "images/sprites/orderly_v2.png"
-        zoom 1.1
+    if is_event_sprite(new_year_start_date, new_year_end_date): # orderly_normal
+        image orderly_normal:
+            "images/sprites/orderly_yn.png"
+            zoom 1.1
+    else:
+        image orderly_normal:
+            "images/sprites/orderly.png"
+            zoom 1.1
+    if is_event_sprite(new_year_start_date, new_year_end_date): # dir_durka_normal
+        image dir_durka_normal:
+            "images/sprites/orderly_v2_yn.png"
+            zoom 1.1
+    else:
+        image dir_durka_normal:
+            "images/sprites/orderly_v2.png"
+            zoom 1.1
     image security_normal:
         "images/sprites/security.png"
         zoom 1.1
@@ -271,7 +335,7 @@ init 1:
     # Логотипы
     image CrucialExperiment = "gui/logos/crucialexperiment.png"
     
-    if _preferences.language != "russian":
+    if _preferences.language != None:
         image RenPy = "gui/logos/renpy_en.png"
         image Later_001 = "gui/logos/later_en.png"
         image attention = "gui/logos/attention_en.png"

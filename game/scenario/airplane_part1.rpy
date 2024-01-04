@@ -456,6 +456,6 @@ label part1_airplane:
 
     scene black with dissolve
 
-    center_text "Конец демо-версии эпизода\nОжидайте следующий обновлений"
+    center_text "Конец демо-версии эпизода\nОжидайте следующих обновлений"
 
     return
