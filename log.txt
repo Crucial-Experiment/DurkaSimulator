@@ -1,54 +1,64 @@
-Thu Jan  4 21:36:39 2024
+2024-01-29 11:40:05 UTC
 Windows-10-10.0.22631
-Ren'Py 8.1.3.23091805
- 
+Ren'Py 8.2.0.24012702
 
-Bootstrap to the start of init.init. took 0.03s
-Early init. took 0.00s
 Path_found: D:\RenPy/renpy/common; cwd: D:\RenPy
-Loader init. took 0.04s
-Loading error handling. took 0.03s
-Loading script. took 0.14s
-Loading save slot metadata. took 0.01s
-Loading persistent. took 0.00s
+Early init took 0.16s
+Loading error handling took 0.12s
+Loading script took 1.19s
+Loading save slot metadata took 0.10s
+Loading persistent took 0.00s
 Initialized steam.
+ - Init at renpy/common/00steam.rpy:712 took 0.31345 s.
 
 Attempting to connect to Discord Rich Presence...
 
 Successfully connected.
- - Init at game/libs/renpy-discord-presence/rich_presence.rpy:11 took 0.89550 s.
+ - Init at game/libs/renpy-discord-presence/rich_presence.rpy:11 took 0.37423 s.
 Steam Game Language: russian
 Unable to update the game language
-Running init code. took 1.22s
-Loading analysis data. took 0.01s
-Analyze and compile ATL. took 0.01s
-Reloading save slot metadata. took 0.01s
+{'steamid': 76561198413976685, 'itemsid[]': [2], 'game': 'durkasim'}
+<h1>Forbidden<br>Access is denied. Retrying will not help.<br>
+    <span style='color: red'>All items are already in your inventory.</span></h1>
+ - Init at game/screens/settings.rpy:1 took 0.63575 s.
+ - Init at game/images/resources/inventory.rpy:1 took 0.89478 s.
+Running init code took 2.47s
+Loading analysis data took 0.02s
+Analyze and compile ATL took 0.01s
+Reloading save slot metadata took 0.08s
 Index archives took 0.00s
-Dump and make backups. took 0.05s
-Cleaning cache. took 0.00s
-Making clean stores. took 0.00s
-Initial gc. took 0.04s
+Dump and make backups took 0.05s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc took 0.04s
 DPI scale factor: 1.250000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object. took 0.36s
+Creating interface object took 0.26s
 Cleaning stores took 0.00s
-Init translation took 0.05s
+Init translation took 0.03s
 Build styles took 0.00s
-Load screen analysis took 0.03s
-Analyze screens took 0.00s
-Save screen analysis took 0.00s
-Prepare screens took 0.06s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.00s
+Load screen analysis took 0.01s
+Analyze screens took 0.02s
+Save screen analysis took 0.02s
+game/screens/inventory.rpy:83: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if item_data.get("use_type") is "health":
+game/screens/inventory.rpy:89: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  elif item_data.get("use_type") is "clothes":
+game/screens/inventory.rpy:96: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  elif item_data.get("use_type") is "applies":
+game/screens/inventory.rpy:98: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if item_data.get("applies_type") is not None and item_data.get("applies_type") is "boom":
+Prepare screens took 0.10s
+Save pyanalysis. took 0.02s
+Save bytecode. took 0.03s
 Running _start took 0.00s
 
 Discord Presence Set:
 details:      Застрял на песне в меню
 large_image:  icon_test
 start:        start_time
-Performance test:
-Interface start. took 0.15s
+Interface start took 0.44s
 
 Initializing gl2 renderer:
 primary display bounds: (0, 0, 1920, 1080)
@@ -56,9 +66,9 @@ swap interval: 1 frames
 Windowed mode.
 Vendor: "b'NVIDIA Corporation'"
 Renderer: b'NVIDIA GeForce GTX 1650 with Max-Q Design/PCIe/SSE2'
-Version: b'4.6.0 NVIDIA 546.17'
+Version: b'4.6.0 NVIDIA 546.33'
 Display Info: None
-Screen sizes: virtual=(1280, 720) physical=(1600, 900) drawable=(1600, 900)
+Screen sizes: virtual=(1280, 720) physical=(1589, 894) drawable=(1589, 894)
 Maximum texture size: 4096x4096
 
 Closing DRP connection.

@@ -613,3 +613,37 @@ init -1499 python in _steamlib:
         Get the name of the session client device
         """
         return steamapi.SteamRemotePlay().BSendRemotePlayTogetherInvite(user)
+
+
+    # SteamInventory
+
+    def get_all_items():
+        steam_user_id = get_steam_id()
+
+        response = requests.get(f"https://crucialexperiment.su/api/steam/user-items.php?steamid={steam_user_id}")
+        data = response.json()
+        return data
+
+    def add_item(item_ids):
+        steam_user_id = get_steam_id()
+        api_url = "https://crucialexperiment.su/api/steam/add-item.php"
+
+        payload = {
+            'steamid': steam_user_id,
+            'itemsid[]': item_ids,
+            'game': 'durkasim',
+        }
+
+        print(payload)
+
+        response = requests.post(api_url, data=payload)
+
+        print(response.text)
+
+        return response.text
+
+    def destroy_result(resultHandle):
+        """
+        Destroys the result descriptor and frees up all associated memory
+        """
+        return steamapi.SteamInventory().DestroyResult(resultHandle)

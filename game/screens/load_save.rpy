@@ -1,9 +1,11 @@
 screen save():
     tag menu
+    
     use file_slots(_("Сохранить"))
 
 screen load():
     tag menu
+
     use file_slots(_("Загрузить"))
 
 screen file_slots(title):

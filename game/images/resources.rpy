@@ -1,8 +1,10 @@
 init python:
     import datetime
 
-    new_year_start_date = [2023, 12, 21]
-    new_year_end_date = [2024, 1, 4]
+    new_year_start_date = [2024, 12, 21]
+    new_year_end_date = [2025, 1, 4]
+
+    mickey_prisoner_jacket = False
 
     def is_event_sprite(start, end):
         start_date = datetime.date( start[0], start[1], start[2] )
@@ -10,6 +12,12 @@ init python:
 
         today = datetime.date.today()
         return start_date <= today <= end_date
+
+    def should_show_mdef_sprite():
+        return not should_show_minv_sprite("Prisoner's Jacket") and not is_event_sprite(new_year_start_date, new_year_end_date)
+
+    def should_show_minv_sprite(item_name):
+        return inventory.get(item_name) is not None and mickey_prisoner_jacket if inventory is not None else False
 
 init 1:
 
@@ -42,73 +50,76 @@ init 1:
     #Персонажи
 
     #Микки
-    if is_event_sprite(new_year_start_date, new_year_end_date): # mickey_happy
-        image mickey_happy:
-            "images/sprites/mickey/mickey_happy_yn.png"
-            zoom 1.1
-    else:
-        image mickey_happy:
-            "images/sprites/mickey/mickey_happy.png"
-            zoom 1.1
+    image mickey_happy:
+        ConditionSwitch(
+            should_show_mdef_sprite(), "images/sprites/mickey/mickey_happy.png",
+            should_show_minv_sprite("Prisoner's Jacket"), "images/sprites/mickey/event/mickey_happy_prison.png",
+            "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mickey/event/mickey_happy_yn.png",
+            fit=True
+        )
+        zoom 1.1
 
-    if is_event_sprite(new_year_start_date, new_year_end_date): # mickey_not_happy
-        image mickey_not_happy:
-            "images/sprites/mickey/mickey_not_happy_yn.png"
-            zoom 1.1
-    else:
-        image mickey_not_happy:
-            "images/sprites/mickey/mickey_not_happy.png"
-            zoom 1.1
+    image mickey_not_happy:
+        ConditionSwitch(
+            should_show_mdef_sprite(), "images/sprites/mickey/mickey_not_happy.png",
+            should_show_minv_sprite("Prisoner's Jacket"), "images/sprites/mickey/event/mickey_not_happy_prison.png",
+            "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mickey/event/mickey_not_happy_yn.png",
+            fit=True
+        )
+        zoom 1.1
 
-    if is_event_sprite(new_year_start_date, new_year_end_date): # mickey_serious
-        image mickey_serious:
-            "images/sprites/mickey/mickey_serious_yn.png"
-            zoom 1.1
-    else:
-        image mickey_serious:
-            "images/sprites/mickey/mickey_serious.png"
-            zoom 1.1
+    image mickey_serious:
+        ConditionSwitch(
+            should_show_mdef_sprite(), "images/sprites/mickey/mickey_serious.png",
+            should_show_minv_sprite("Prisoner's Jacket"), "images/sprites/mickey/event/mickey_serious_prison.png",
+            "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mickey/event/mickey_serious_yn.png",
+            fit=True
+        )
+        zoom 1.1
 
-    if is_event_sprite(new_year_start_date, new_year_end_date): # mickey_shouts
-        image mickey_shouts:
-            "images/sprites/mickey/mickey_shouts_yn.png"
-            zoom 1.1
-    else:
-        image mickey_shouts:
-            "images/sprites/mickey/mickey_shouts.png"
-            zoom 1.1
+    image mickey_shouts:
+        ConditionSwitch(
+            should_show_mdef_sprite(), "images/sprites/mickey/mickey_shouts.png",
+            should_show_minv_sprite("Prisoner's Jacket"), "images/sprites/mickey/event/mickey_shouts_prison.png",
+            "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mickey/event/mickey_shouts_yn.png",
+            fit=True
+        )
+        zoom 1.1
 
-    if is_event_sprite(new_year_start_date, new_year_end_date): # mickey_thinks
-        image mickey_thinks:
-            "images/sprites/mickey/mickey_thinks_yn.png"
-            zoom 1.1
-    else:
-        image mickey_thinks:
-            "images/sprites/mickey/mickey_thinks.png"
-            zoom 1.1
+    image mickey_thinks:
+        ConditionSwitch(
+            should_show_mdef_sprite(), "images/sprites/mickey/mickey_thinks.png",
+            should_show_minv_sprite("Prisoner's Jacket"), "images/sprites/mickey/event/mickey_thinks_prison.png",
+            "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mickey/event/mickey_thinks_yn.png",
+            fit=True
+        )
+        zoom 1.1
 
     image mickey_back:
-        "images/sprites/mickey/mickey_back.png"
+        ConditionSwitch(
+            should_show_mdef_sprite(), "images/sprites/mickey/mickey_back.png",
+            should_show_minv_sprite("Prisoner's Jacket"), "images/sprites/mickey/event/mickey_back_prison.png",
+            "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mickey/event/mickey_back_yn.png",
+            fit=True
+        )
         zoom 1.1
 
     #Загадочный
-    if is_event_sprite(new_year_start_date, new_year_end_date): # mysterious_normal
-        image mysterious_normal:
-            "images/sprites/mysterious_yn.png"
-            zoom 1.1
-    else:
-        image mysterious_normal:
-            "images/sprites/mysterious.png"
-            zoom 1.1
+    image mysterious_normal:
+        ConditionSwitch(
+            "not is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mysterious.png",
+            "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mysterious_yn.png",
+            fit=True
+        )
+        zoom 1.1
 
-    if is_event_sprite(new_year_start_date, new_year_end_date): # mysterious_angry
-        image mysterious_angry:
-            "images/sprites/mysterious_angry_yn.png"
-            zoom 1.1
-    else:
-        image mysterious_angry:
-            "images/sprites/mysterious_angry.png"
-            zoom 1.1
+    image mysterious_angry:
+        ConditionSwitch(
+            "not is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mysterious_angry.png",
+            "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mysterious_angry_yn.png",
+            fit=True
+        )
+        zoom 1.1
 
     #Старик
     image old_man_normal:
@@ -185,22 +196,23 @@ init 1:
     image larry_back:
         "images/sprites/larry_back.png"
         zoom 1.1
-    if is_event_sprite(new_year_start_date, new_year_end_date): # orderly_normal
-        image orderly_normal:
-            "images/sprites/orderly_yn.png"
-            zoom 1.1
-    else:
-        image orderly_normal:
-            "images/sprites/orderly.png"
-            zoom 1.1
-    if is_event_sprite(new_year_start_date, new_year_end_date): # dir_durka_normal
-        image dir_durka_normal:
-            "images/sprites/orderly_v2_yn.png"
-            zoom 1.1
-    else:
-        image dir_durka_normal:
-            "images/sprites/orderly_v2.png"
-            zoom 1.1
+    image orderly_normal:
+        ConditionSwitch(
+            "not is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/orderly.png",
+            "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/orderly_yn.png",
+            fit=True
+        )
+        zoom 1.1
+    image dir_durka_normal:
+        ConditionSwitch(
+            "not is_event_sprite(new_year_start_date, new_year_end_date)",  "images/sprites/orderly_v2.png",
+            "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/orderly_v2_yn.png",
+            fit=True
+        ) 
+        zoom 1.1
+    image orderly_mercenary_v2:
+        "images/sprites/orderly_mercenary_v2.png"
+        zoom 1.1
     image security_normal:
         "images/sprites/security.png"
         zoom 1.1
@@ -256,6 +268,11 @@ init 1:
         xalign 0.5
         yalign 0.5
         zoom 0.7
+    image mickey_bible:
+        "images/items/bible.png"
+        xalign 0.5
+        yalign 0.5
+        zoom 0.2
 
     #Фоны
     image redsquare_bg = "images/backgrounds/redsquare.jpg"

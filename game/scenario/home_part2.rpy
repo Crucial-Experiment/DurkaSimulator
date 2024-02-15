@@ -80,17 +80,13 @@ label part2_home_b1:
 
     mickey "Хаха, я победил тебя."
 
-    play sound sound_list["item_received_1"]
-
     hide mickey_serious
-    show mickey_passport
     with dissolve
-
-    "Паспорт получен."
+    
+    call add_inv_item(inv_passport_item_id, show_item=True, add_to_steam=False)
 
     play sound sound_list["picked_up_an_item"]
 
-    hide mickey_passport
     show mickey_happy
     with dissolve
 

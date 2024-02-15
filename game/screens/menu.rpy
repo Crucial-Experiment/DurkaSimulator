@@ -1,8 +1,6 @@
-screen main_menu():
-    tag menu
-
+screen main_menu_bg():
     $ state = "mm"
-
+    
     add TrackCursor("gui/main menu/main_menu.png", 20)
     add TrackCursor("gui/main menu/main_menu_C.png", 13)
     add TrackCursor("gui/main menu/main_menu_A.png", 10)
@@ -11,6 +9,11 @@ screen main_menu():
         add TrackCursor("gui/main menu/main_menu_B_yn.png", 7)
     else:
         add TrackCursor("gui/main menu/main_menu_B.png", 7)
+
+screen main_menu():
+    tag menu
+
+    use main_menu_bg
 
     frame:
         style "main_menu_frame"
@@ -38,7 +41,7 @@ screen navigation():
                 spacing gui.navigation_spacing
 
                 if main_menu:
-                    textbutton _("Начать") action Start()
+                    textbutton _("Начать") action ShowMenu("start_selection")
                 else:
                     textbutton _("История") action ShowMenu("history")
 
@@ -75,7 +78,10 @@ screen navigation():
 
             imagemap:
                 idle "gui/media/discord_icon.png"
-                hotspot (0, 0, 100, 100) action [achievement.grant("WelcomeToCommunity"), achievement.sync(), OpenURL('https://discord.gg/RNzGSkGhqz')]
+                if config.steam_appid == 0 and persistent.name and persistent.token:
+                    hotspot (0, 0, 100, 100) action [GameJoltAPI.addAchieved(221112), OpenURL('https://discord.gg/RNzGSkGhqz')]
+                else:
+                    hotspot (0, 0, 100, 100) action [achievement.grant("WelcomeToCommunity"), achievement.sync(), OpenURL('https://discord.gg/RNzGSkGhqz')]
 
             imagemap:
                 idle "gui/media/vk_icon.png"
@@ -155,3 +161,24 @@ style main_menu_vbox:
     xmaximum 800
     yalign 1.0
     yoffset -20
+
+screen gamejolt_start_screen():
+    frame:
+        padding (12, 10)
+        xalign 0.5
+        yalign 0.5
+
+        vbox:
+
+            xalign 0.5
+            yalign 0.5
+
+            vbox:
+                text "Добро пожаловать, давайте настроим для вас Game Jolt API,\nчтобы получить все возможности игры?"
+            
+            null height 15
+
+            hbox:
+                textbutton "Отказаться" action MainMenu(confirm=False)
+                null width 15
+                textbutton "Согласиться" action Return()

@@ -9,7 +9,7 @@
     # config.window_icon = "images/misc/icon.png"
     # config.windows_icon = "images/misc/icon.png"
 
-    config.steam_appid = 1450150 #SteamID: 1450150, VK Play: 2018064
+    config.steam_appid = 1450150 # SteamID: 1450150, VK Play: 2018064, GameJolt: 0
     config.developer = True
     config.skip_indicator = True
     config.has_autosave = True
@@ -39,7 +39,14 @@
     config.window_hide_transition = Dissolve(.25)
 
 # Достижения
+define GameJoltAPI = None
+define GameJoltAPICheck = None 
+
 init:
+    if config.steam_appid == 0 and persistent.name and persistent.token:
+        $ GameJoltAPI = GameJoltTrophy(persistent.name, persistent.token, 752408, "6a59d4828b16e13ca47ee16cf35a98bd")
+        $ GameJoltAPICheck = GameJoltAPI.openSession()
+
     $ achievement.register("ChapterOne") # Эпизод 1
     $ achievement.register("ILoveSchool") # Я люблю школу
     $ achievement.register("IHateSchool") # Я ненавижу школу

@@ -26,8 +26,11 @@ label part2_village:
 
             play sound sound_list["punch"]
 
-            $ achievement.grant("FirstBlood")
-            $ achievement.sync()
+            if config.steam_appid == 0 and persistent.name and persistent.token:
+                $ GameJoltAPI.addAchieved(221109)
+            else:
+                $ achievement.grant("FirstBlood")
+                $ achievement.sync()
 
             pause(0.4)
 
@@ -37,16 +40,9 @@ label part2_village:
 
             mickey "Что это у него в кармане..."
 
-            show mickey_shaver
-            with dissolve
-
             $ shaver_killer = True
-            "Получен 1 бритвенный станок."
 
-            play sound sound_list["picked_up_an_item"]
-
-            hide mickey_shaver
-            with dissolve
+            call add_inv_item(inv_shaver_item_id, show_item=True, add_to_steam=False)
 
             mickey "Хм... Его можно использовать как оружие."
 
@@ -696,8 +692,11 @@ label part2_village_b1:
 
     pause(0.7)
 
-    $ achievement.grant("FirstBlood")
-    $ achievement.sync()
+    if config.steam_appid == 0 and persistent.name and persistent.token:
+        $ GameJoltAPI.addAchieved(221109)
+    else:
+        $ achievement.grant("FirstBlood")
+        $ achievement.sync()
 
     scene lonely_village_bg
     hide mickey_serious 

@@ -1,5 +1,7 @@
-init python:
+init -9 python:
     import steamapi
+
+    is_night_version = True
 
     if not renpy.variant("mobile") and steamapi.Init():
         steam_running = True
@@ -12,6 +14,10 @@ init python:
                 renpy.change_language(None)
         except:
             print("Unable to update the game language")
+
+        if is_night_version:
+            _steamlib.add_item([2])
+
     else:
         steam_running = False
 
@@ -22,6 +28,19 @@ init python:
     languages_def = {}
     languages_def["english"] = _("English")
     languages_def["russian"] = _("Russian")
+
+    if renpy.android:
+        import jnius
+        mActivity = jnius.autoclass("org.renpy.android.PythonSDLActivity").mActivity
+    else:
+        mActivity = None
+
+    def unlock_achievement(achievement_id):
+        if mActivity:
+            try:
+                Games.Achievements.unlock(mActivity.getApiClient(), achievement_id)
+            except Exception as e:
+                print("Failed to unlock achievement:", str(e))
 
 screen choose_language_panel:
 
@@ -40,17 +59,107 @@ screen choose_language_panel:
                     textbutton name action [Language(None), Hide("choose_language_panel"), SetField(persistent, "lang_menu", True), Return('OK')] xalign 0.5
 
 screen preferences():
-
     tag menu
 
-    use game_menu(_("Настройки"), scroll="viewport"):
+    use game_menu( _("Настройки") ):
 
         vbox:
+            style_prefix "navigation"
+            spacing gui.navigation_spacing
 
-            hbox:
-                box_wrap True
+            textbutton _("Основные") action ShowMenu("all_preferences")
 
-                if renpy.variant("pc") or renpy.variant("web"):
+            if renpy.variant("pc") or renpy.variant("web"):
+                textbutton _("Видео") action ShowMenu("video_preferences")
+
+            textbutton _("Звук") action ShowMenu("sound_preferences")
+
+screen all_preferences():
+    tag menu
+    modal True
+
+    use game_menu( _("Настройки") ):
+
+        vbox:
+            ypos 50
+
+            viewport:
+                style_prefix "navigation"
+                spacing gui.navigation_spacing
+
+                draggable True
+                mousewheel True
+                scrollbars None
+                yinitial 0.0
+
+                xalign 0.5
+                yalign 0.5
+
+                xsize 180
+                ysize 300
+
+                vbox:
+
+                    vbox:
+                        style_prefix "radio"
+
+                        label _("Пропуск")
+
+                        textbutton _("Всего текста") action Preference("skip", "toggle")
+
+                        textbutton _("После выборов") action Preference("after choices", "toggle")
+                            
+                        textbutton _("Переходов") action InvertSelected(Preference("transitions", "toggle"))
+
+                    null height (2 * gui.pref_spacing)
+
+                    vbox:
+                        style_prefix "radio"
+                        label _("Язык")
+
+                        if steam_running == True:
+                            text _("Язык можно изменить в лаунчере, где была запущена игра")
+                        else:
+                            for cd, name in sorted(languages.iteritems()):
+                                if cd != "russian":
+                                    textbutton name action Language(cd)
+                                else:
+                                    textbutton name action Language(None)
+
+                    null height (2 * gui.pref_spacing)
+
+                    vbox:
+                        label _("Скорость текста")
+                        bar value Preference("text speed")
+
+                        # label _("Скорость авточтения")
+                        # bar value Preference("auto-forward time")
+
+screen video_preferences():
+    tag menu
+    modal True
+
+    use game_menu( _("Настройки") ):
+
+        vbox:
+            ypos 50
+
+            viewport:
+                style_prefix "navigation"
+                spacing gui.navigation_spacing
+
+                draggable True
+                mousewheel True
+                scrollbars None
+                yinitial 0.0
+
+                xalign 0.5
+                yalign 0.5
+
+                xsize 180
+                ysize 300
+
+                vbox:
 
                     vbox:
                         style_prefix "radio"
@@ -58,76 +167,71 @@ screen preferences():
                         textbutton _("Оконный") action Preference("display", "window")
                         textbutton _("Полный") action Preference("display", "fullscreen")
 
-                vbox:
-                    style_prefix "check"
-                    label _("Пропуск")
-                    textbutton _("Всего текста") action Preference("skip", "toggle")
-                    textbutton _("После выборов") action Preference("after choices", "toggle")
-                    textbutton _("Переходов") action InvertSelected(Preference("transitions", "toggle"))
+screen sound_preferences():
+    tag menu
+    modal True
 
-                vbox:
-                    style_prefix "check"
-                    label _("Язык")
-                    if steam_running == True:
-                        text _("Язык можно изменить в лаунчере, где была запущена игра")
-                    else:
-                        for cd, name in sorted(languages.iteritems()):
-                            if cd != "russian":
-                                textbutton name action Language(cd)
-                            else:
-                                textbutton name action Language(None)
+    use game_menu( _("Настройки") ):
 
-            null height (4 * gui.pref_spacing)
+        vbox:
+            ypos 50
 
-            hbox:
-                style_prefix "slider"
-                box_wrap True
+            viewport:
+                style_prefix "navigation"
+                spacing gui.navigation_spacing
 
-                vbox:
+                draggable True
+                mousewheel True
+                scrollbars None
+                yinitial 0.0
 
-                    label _("Скорость текста")
+                xalign 0.5
+                yalign 0.5
 
-                    bar value Preference("text speed")
-
-                    label _("Скорость авточтения")
-
-                    bar value Preference("auto-forward time")
+                xsize 180
+                ysize 300
 
                 vbox:
 
-                    if config.has_music:
-                        label _("Громкость музыки")
+                    vbox:
 
-                        hbox:
-                            bar value Preference("music volume")
+                        if config.has_music:
+                            label _("Громкость музыки")
 
-                    if config.has_sound:
+                            hbox:
+                                bar value Preference("music volume")
 
-                        label _("Громкость звуков")
+                            null height (2 * gui.pref_spacing)
 
-                        hbox:
-                            bar value Preference("sound volume")
+                        if config.has_sound:
 
-                            if config.sample_sound:
-                                textbutton _("Тест") action Play("sound", config.sample_sound)
+                            label _("Громкость звуков")
 
+                            hbox:
+                                bar value Preference("sound volume")
 
-                    if config.has_voice:
-                        label _("Громкость голоса")
+                                if config.sample_sound:
+                                    textbutton _("Тест") action Play("sound", config.sample_sound)
 
-                        hbox:
-                            bar value Preference("voice volume")
+                            null height (2 * gui.pref_spacing)
 
-                            if config.sample_voice:
-                                textbutton _("Тест") action Play("voice", config.sample_voice)
+                        if config.has_voice:
+                            label _("Громкость голоса")
 
-                    if config.has_music or config.has_sound or config.has_voice:
-                        null height gui.pref_spacing
+                            hbox:
+                                bar value Preference("voice volume")
 
-                        textbutton _("Без звука"):
-                            action Preference("all mute", "toggle")
-                            style "mute_all_button"
+                                if config.sample_voice:
+                                    textbutton _("Тест") action Play("voice", config.sample_voice)
 
+                            null height (2 * gui.pref_spacing)
+
+                        if config.has_music or config.has_sound or config.has_voice:
+                            null height gui.pref_spacing
+
+                            textbutton _("Без звука"):
+                                action Preference("all mute", "toggle")
+                                style "mute_all_button"
 
 style pref_label is gui_label
 style pref_label_text is gui_label_text

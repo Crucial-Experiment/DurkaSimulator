@@ -3,9 +3,12 @@ label part1_airplane:
     scene black with dissolve
     pause(0.2)
     scene airplane_inside_bg with dissolve
-    
-    $ achievement.grant("WelcomeToPlane")
-    $ achievement.sync()
+
+    if config.steam_appid == 0 and persistent.name and persistent.token:
+        $ GameJoltAPI.addAchieved(221111)
+    else:
+        $ achievement.grant("WelcomeToPlane")
+        $ achievement.sync()
 
     show mickey_happy at left with moveinleft
     show mysterious_normal at right with moveinright
@@ -361,8 +364,11 @@ label part1_airplane:
         show kolya_dead
         with dissolve
 
-        $ achievement.grant("StrayBullet")
-        $ achievement.sync()
+        if config.steam_appid == 0 and persistent.name and persistent.token:
+            $ GameJoltAPI.addAchieved(221113)
+        else:
+            $ achievement.grant("StrayBullet")
+            $ achievement.sync()
 
         pause(1.2)
 
@@ -448,14 +454,76 @@ label part1_airplane:
 
         mickey "ОН ИСТЕКАЛ КРОВЬЮ!"
 
-        mysterious "Такое случается, и я думаю, что мы бежали от террористов."
+        mysterious "Такое случается, и я думаю, что мы сбежали от террористов."
+    else:
+        mysterious "Я думаю, мы сбежали от террористов."
 
-        "???" "Далеко собрались?"
+    show mysterious_normal at center
+    show mickey_not_happy at right
+    show orderly_mercenary_v2 at left
+    with moveinleft
 
-        mickey "Пришло время уходить отсюда..."
+    "???" "Далеко собрались?"
 
-    scene black with dissolve
+    mickey "Пришло время уходить отсюда..."        
 
-    center_text "Конец демо-версии эпизода\nОжидайте следующих обновлений"
+    "???" "Вам уже не куда бежать, самое время забрать объект и посадить куда следует."
+
+    "???" "Наемник A064 не смог выполнить свой долг и был убит. Значит, пришло время для специального отряда."
+
+    hide mickey_not_happy
+    show mickey_shouts at right
+    with dissolve
+
+    mickey "Хватит уже преследовать меня!"
+
+    mickey "Мокки, ты вообще что-то делать собираешься?"
+
+    mysterious "Слушай, ты какой-то человек, которого я вижу в первый раз. Пошли, выйдем один на один?"
+
+    "???" "Ха-ха, с удовольствием."
+
+    hide mysterious_normal
+    hide orderly_mercenary_v2
+    show mickey_shouts at center
+    with moveoutleft
+
+    hide mickey_shouts
+    show mickey_thinks at center
+    with dissolve
+
+    mickey "Ч-что это щас было? Такое чувство, что они уже были знакомы..."
+
+    mickey "Надеюсь, это не правда, и мне просто показалось, а иначе верить самому себе я бы тоже уже не стал."
+
+    show stewardess_normal at right
+    with moveinright
+
+    if not mercenary_dead:
+        stewardess "Я прошу прощения, но что тут происходит? У нас, как бы, труп в салоне, и как я понимаю, это все ваша вина."
+    
+        mickey "Нечего особенного, просто меня пытаются похитить, чтобы остановить меня из будущего помешать планам каким-то там санитаром."
+
+        mickey "Они убили моего друга Колю, который попытался спасти меня своим телом..."
+    else:
+        stewardess "Я прошу прощения, но что тут происходит?"
+
+        mickey "Нечего особенного, просто меня пытаются похитить, чтобы остановить меня из будущего помешать планам каким-то там санитаром."
+
+    stewardess "Понятно, у нас тут ещё один поехавший. Подождите, тут сейчас мы вызовем психушку."
+
+    hide stewardess_normal
+    with moveoutright
+
+    hide mickey_thinks
+    show mickey_shouts at center
+    with dissolve
+
+    mickey "Стоп, какая ещё психушка!? Нет, нет, стойте, я не псих!!!"
+
+    if not mercenary_dead:
+        mickey "Молодец Микки, опять что-то ляпнул не то... Вот бы сейчас тут был Мокки или Коля, они бы точно решили этот вопрос."
+    else:
+        mickey "Молодец Микки, опять что-то ляпнул не то... Вот бы сейчас тут был Мокки, он бы точно решил этот вопрос."
 
     return

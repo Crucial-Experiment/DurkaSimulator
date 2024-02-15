@@ -33,7 +33,7 @@ label game_battle:
         if orderly_health <= 0:
             $ renpy.jump(battle_label)
 
-    if mickey_health < 0:
+    if mickey_health <= 0:
         jump game_over
     else:
         menu:
@@ -49,14 +49,20 @@ label game_battle:
                 $ it_death_node = True
 
             "Бритва" if shaver_killer:
-                $ achievement.grant("SweeneyTodd")
-                $ achievement.sync()
+                if config.steam_appid == 0 and persistent.name and persistent.token:
+                    $ GameJoltAPI.addAchieved(221108)
+                else:
+                    $ achievement.grant("SweeneyTodd")
+                    $ achievement.sync()
 
                 $ it_shaver = True
 
             "Библия" if holy_killer:
-                $ achievement.grant("BiblicalMurder")
-                $ achievement.sync()
+                if config.steam_appid == 0 and persistent.name and persistent.token:
+                    $ GameJoltAPI.addAchieved(221110)
+                else:
+                    $ achievement.grant("BiblicalMurder")
+                    $ achievement.sync()
 
                 $ it_bible = True                
 
@@ -71,9 +77,11 @@ label game_battle:
 
         if battle_character == "mercenary":
             $ mercenary_health -= random
+            $ mercenary_health = max(0, mercenary_health)
 
         elif battle_character == "orderly":
             $ orderly_health -= random
+            $ orderly_health = max(0, orderly_health)
 
         "Вы наносите [random] единиц урона."
 
@@ -85,9 +93,11 @@ label game_battle:
 
         if battle_character == "mercenary":
             $ mercenary_health -= random
+            $ mercenary_health = max(0, mercenary_health)
 
         elif battle_character == "orderly":
             $ orderly_health -= random
+            $ orderly_health = max(0, orderly_health)
             
         "Вы наносите [random] единиц урона."
 
@@ -99,9 +109,11 @@ label game_battle:
 
         if battle_character == "mercenary":
             $ mercenary_health -= random
+            $ mercenary_health = max(0, mercenary_health)
 
         elif battle_character == "orderly":
             $ orderly_health -= random
+            $ orderly_health = max(0, orderly_health)
             
         "Вы наносите [random] единиц урона."
 
@@ -113,9 +125,11 @@ label game_battle:
 
         if battle_character == "mercenary":
             $ mercenary_health -= random
+            $ mercenary_health = max(0, mercenary_health)
 
         elif battle_character == "orderly":
             $ orderly_health -= random
+            $ orderly_health = max(0, orderly_health)
             
         "Вы наносите [random] единиц урона."
 
@@ -127,12 +141,16 @@ label game_battle:
     if battle_character == "mercenary":
         $ random = renpy.random.choice(mercenary_xp)
         $ mickey_health -= random
+        $ mickey_health = max(0, mickey_health)
+
         "Наёмник нанес вам [random] единиц урона."
 
     # Если персонаж санитар
     elif battle_character == "orderly":
         $ random = renpy.random.choice(orderly_xp)
         $ mickey_health -= random
+        $ mickey_health = max(0, mickey_health)
+        
         "Санитар нанес вам [random] единиц урона."
 
     jump game_battle

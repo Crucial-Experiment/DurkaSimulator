@@ -109,8 +109,11 @@ label part1_village:
 
             $ renpy.movie_cutscene("video/Мопс_танцует_под_музыку.webm")
 
-            $ achievement.grant("DancingDog")
-            $ achievement.sync()
+            if config.steam_appid == 0 and persistent.name and persistent.token:
+                $ GameJoltAPI.addAchieved(221118)
+            else:
+                $ achievement.grant("DancingDog")
+                $ achievement.sync()
 
         "Номер 2":
             mysterious "Теперь надо найти это видео."
@@ -125,8 +128,11 @@ label part1_village:
 
             $ renpy.movie_cutscene("video/Медведи_танцуют.webm")
 
-            $ achievement.grant("DancingBears")
-            $ achievement.sync()
+            if config.steam_appid == 0 and persistent.name and persistent.token:
+                $ GameJoltAPI.addAchieved(221119)
+            else:
+                $ achievement.grant("DancingBears")
+                $ achievement.sync()
 
         "Номер 3":
             mysterious "Теперь надо найти это видео."
@@ -141,8 +147,11 @@ label part1_village:
 
             $ renpy.movie_cutscene("video/Пират_флексит_под_магнитофон.webm")
 
-            $ achievement.grant("DancingPirate")
-            $ achievement.sync()
+            if config.steam_appid == 0 and persistent.name and persistent.token:
+                $ GameJoltAPI.addAchieved(221120)
+            else:
+                $ achievement.grant("DancingPirate")
+                $ achievement.sync()
 
         "Номер 4":
             mysterious "Теперь надо найти это видео."
@@ -159,8 +168,11 @@ label part1_village:
 
             $ renpy.movie_cutscene("video/Rick_Astley-Never_Gonna_Give_You_Up.webm")
 
-            $ achievement.grant("Ricroll")
-            $ achievement.sync()
+            if config.steam_appid == 0 and persistent.name and persistent.token:
+                $ GameJoltAPI.addAchieved(221121)
+            else:
+                $ achievement.grant("Ricroll")
+                $ achievement.sync()
 
     scene bus_inside_c2_bg with dissolve
 
@@ -233,8 +245,11 @@ label part1_village:
 
                 play music music_list["death_note_ls_theme_b_music"]
 
-                $ achievement.register("LThisIsMe")
-                $ achievement.sync()
+                if config.steam_appid == 0 and persistent.name and persistent.token:
+                    $ GameJoltAPI.addAchieved(221103)
+                else:
+                    $ achievement.grant("LThisIsMe")
+                    $ achievement.sync()
 
                 pause(180.05)
 

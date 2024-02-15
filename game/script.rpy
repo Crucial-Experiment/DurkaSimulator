@@ -1,11 +1,26 @@
 ﻿init python early:
-    mods = {}
-    endings = 2
-    
+    mods = {} # Моды
+    gm_episodes = {} # Эпизоды
+    sp_episodes = {} # Спец эпизоды
+    endings = 2 # Количество концовок
+
+    gm_episodes["start"] = _("Эпизод 1")  
+
+    sp_episodes["part1_love"] = _("Нет названия")
+
+# scene black with dissolve
+# center_text "Конец демо-версии эпизода\nОжидайте следующих обновлений"
+
 label start:
+
+    $ inventory = {}
+    if steam_running:
+        $ update_steam_inventory()
 
     $ mickey_stats = "Неизвестно"
     $ mickey_health = 100
+
+    show screen inventory_button
 
     stop music fadeout 1.0
 
@@ -17,6 +32,12 @@ label start:
             renpy.jump(j)
       
     jump part1_home
+
+    return
+
+label after_load:
+    if steam_running:
+        $ update_steam_inventory()
 
     return
 
@@ -36,13 +57,20 @@ label game_over:
         $ persistent.i_love_death = persistent.i_love_death + 1
 
         if persistent.i_love_death >= 15:
-            $ achievement.grant("ILoveDeath")
-            $ achievement.sync()
+
+            if config.steam_appid == 0 and persistent.name and persistent.token:
+                $ GameJoltAPI.addAchieved(221124)
+            else:
+                $ achievement.grant("ILoveDeath")
+                $ achievement.sync()
 
     pause(0.5)
 
-    $ achievement.grant("MickeyDead")
-    $ achievement.sync()
+    if config.steam_appid == 0 and persistent.name and persistent.token:
+        $ GameJoltAPI.addAchieved(221105)
+    else:
+        $ achievement.grant("MickeyDead")
+        $ achievement.sync()
 
     scene capthepl_bg with dissolve
 
@@ -75,3 +103,14 @@ label splashscreen:
     pause(3.9)
 
     scene black with fade
+
+    if config.steam_appid == 0 and not persistent.name and not persistent.token:
+
+        call screen gamejolt_start_screen
+
+        $ persistent.name = renpy.input("Введите ваше имя пользователя GameJolt")
+
+        $ persistent.token = renpy.input("Введите ваш секретный токен")
+
+        $ GameJoltAPI = GameJoltTrophy(persistent.name, persistent.token, 752408, "6a59d4828b16e13ca47ee16cf35a98bd")
+        $ GameJoltAPICheck = GameJoltAPI.openSession()

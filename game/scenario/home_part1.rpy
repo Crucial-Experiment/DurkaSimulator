@@ -2,8 +2,11 @@ label part1_home:
 
     scene redsquare_bg
 
-    $ achievement.grant("ChapterOne")
-    $ achievement.sync()
+    if config.steam_appid == 0 and persistent.name and persistent.token:
+        $ GameJoltAPI.addAchieved(221021)
+    else:
+        $ achievement.grant("ChapterOne")
+        $ achievement.sync()
 
     announcer "Эта история начинается в 2019 году."
 
@@ -21,8 +24,12 @@ label part1_home:
     
     menu:
         "Остаться до 11-го класса":
-            $ achievement.grant("ILoveSchool")
-            $ achievement.sync()
+
+            if config.steam_appid == 0 and persistent.name and persistent.token:
+                $ GameJoltAPI.addAchieved(221114)
+            else:
+                $ achievement.grant("ILoveSchool")
+                $ achievement.sync()
 
             $ school_choose = True
 
@@ -48,8 +55,12 @@ label part1_home:
             larry "Хорошо, теперь давай войдем внутрь?"
 
         "Уйти после 9-го класса":
-            $ achievement.grant("IHateSchool")
-            $ achievement.sync()
+
+            if config.steam_appid == 0 and persistent.name and persistent.token:
+                $ GameJoltAPI.addAchieved(221115)
+            else:
+                $ achievement.grant("IHateSchool")
+                $ achievement.sync()
 
             $ school_choose = False
 
@@ -120,19 +131,11 @@ label part1_home:
 
         mickey "Но нам задали кучу рефератов, которые я должен сделать за два дня."
 
-    play sound sound_list["item_received_1"]
-
     hide mickey_not_happy
-    show mickey_notebook
-    with dissolve
-
-    "Получена 1 тетрадка с домашним заданием."
-
-    stop sound fadeout 1.0
-
-    hide mickey_notebook
-    show mickey_happy
-    with dissolve
+    
+    call add_inv_item(inv_notebook_item_id, show_item=True, add_to_steam=False)
+    
+    show mickey_happy with dissolve
 
     mickey "Хотя я, наверное, спишу некоторые материалы из интернета."
 
@@ -403,11 +406,7 @@ label part1_home:
 
     show durka_key_card with dissolve
 
-    "Достал карту доступа и переделал её Микки."
-
-    play sound sound_list["picked_up_an_item"]
-
-    hide durka_key_card with dissolve
+    call add_inv_item(inv_key_card_item_id, show_item=True, add_to_steam=False)
 
     mickey "Почему она вся в крови?"
 
@@ -621,8 +620,11 @@ label part1_home:
 
             play sound sound_list["shackles"]
 
-            $ achievement.grant("WeHaveYouNow")
-            $ achievement.sync()
+            if config.steam_appid == 0 and persistent.name and persistent.token:
+                $ GameJoltAPI.addAchieved(221116)
+            else:
+                $ achievement.grant("WeHaveYouNow")
+                $ achievement.sync()
 
             $ persistent.bad_ending_mys_missing = True
 
@@ -668,8 +670,11 @@ label part1_home:
             announcer "И они отправились за первым камнем бесконечности."
             announcer "Их путь будет непростым, но они справятся (наверное)."
 
-            $ achievement.grant("SearchingForRocks")
-            $ achievement.sync()
+            if config.steam_appid == 0 and persistent.name and persistent.token:
+                $ GameJoltAPI.addAchieved(221117)
+            else:
+                $ achievement.grant("SearchingForRocks")
+                $ achievement.sync()
 
             scene forest_bg with dissolve
             show mickey_happy at left with moveinright
@@ -728,8 +733,12 @@ label part1_home:
                 "Выберите, для кого показать историю?"
 
                 "Микки":
-                    $ achievement.register("MickeysChoice")
-                    $ achievement.sync()
+
+                    if config.steam_appid == 0 and persistent.name and persistent.token:
+                        $ GameJoltAPI.addAchieved(221102)
+                    else:
+                        $ achievement.grant("MickeysChoice")
+                        $ achievement.sync()
 
                     hide mickey_thinks at left with easeoutleft
 
@@ -805,16 +814,12 @@ label part1_home:
                     mickey "...Неважно."
 
                     mickey "Беру чай и иду к Загадочному."
-                    
+
                     hide mickey_thinks
-                    show shop_tea
                     with dissolve
+                    
+                    call add_inv_item(inv_tea_item_id, show_item=True, add_to_steam=False)
 
-                    "Получена 1 упаковка с чаем."
-
-                    play sound sound_list["picked_up_an_item"]
-
-                    hide shop_tea
                     show mickey_thinks
                     with dissolve
 
@@ -835,8 +840,12 @@ label part1_home:
                     mickey "Тогда пошли?"
 
                 "Загадочный":
-                    $ achievement.register("ChoosingTheUnknown")
-                    $ achievement.sync()
+
+                    if config.steam_appid == 0 and persistent.name and persistent.token:
+                        $ GameJoltAPI.addAchieved(221101)
+                    else:
+                        $ achievement.grant("ChoosingTheUnknown")
+                        $ achievement.sync()
 
                     hide mickey_thinks at left with easeoutleft
 
