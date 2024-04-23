@@ -107,7 +107,7 @@ label part1_village:
 
             scene black with dissolve
 
-            $ renpy.movie_cutscene("video/Мопс_танцует_под_музыку.webm")
+            $ renpy.movie_cutscene("video/dancing_dog.webm")
 
             if config.steam_appid == 0 and persistent.name and persistent.token:
                 $ GameJoltAPI.addAchieved(221118)
@@ -126,7 +126,7 @@ label part1_village:
 
             scene black with dissolve
 
-            $ renpy.movie_cutscene("video/Медведи_танцуют.webm")
+            $ renpy.movie_cutscene("video/dancing_bear.webm")
 
             if config.steam_appid == 0 and persistent.name and persistent.token:
                 $ GameJoltAPI.addAchieved(221119)
@@ -145,7 +145,7 @@ label part1_village:
 
             scene black with dissolve
 
-            $ renpy.movie_cutscene("video/Пират_флексит_под_магнитофон.webm")
+            $ renpy.movie_cutscene("video/dancing_pirate.webm")
 
             if config.steam_appid == 0 and persistent.name and persistent.token:
                 $ GameJoltAPI.addAchieved(221120)

@@ -620,21 +620,19 @@ init -1499 python in _steamlib:
     def get_all_items():
         steam_user_id = get_steam_id()
 
-        response = requests.get(f"https://crucialexperiment.su/api/steam/user-items.php?steamid={steam_user_id}")
+        response = requests.get(f"https://api.crucialexperiments.com/durka_simulator/items/{steam_user_id}")
         data = response.json()
         return data
 
     def add_item(item_ids):
         steam_user_id = get_steam_id()
-        api_url = "https://crucialexperiment.su/api/steam/add-item.php"
+        api_url = "https://crucialexperiments.com/durka_simulator/steam/add"
 
         payload = {
             'steamid': steam_user_id,
             'itemsid[]': item_ids,
             'game': 'durkasim',
         }
-
-        print(payload)
 
         response = requests.post(api_url, data=payload)
 

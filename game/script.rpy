@@ -6,7 +6,7 @@
 
     gm_episodes["start"] = _("Эпизод 1")  
 
-    sp_episodes["part1_love"] = _("Нет названия")
+    # sp_episodes["part1_love"] = _("Нет названия")
 
 # scene black with dissolve
 # center_text "Конец демо-версии эпизода\nОжидайте следующих обновлений"

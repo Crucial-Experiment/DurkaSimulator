@@ -1,8 +1,19 @@
 init python:
     import datetime
 
-    new_year_start_date = [2024, 12, 21]
-    new_year_end_date = [2025, 1, 4]
+    today = datetime.date.today()
+    current_year = today.year
+
+    current_month = today.month
+    current_day = today.day
+
+    # Какой сейчас год?
+    if current_month == 12 and current_day < 31:
+        new_year_start_date = [current_year, 12, 21]
+        new_year_end_date = [current_year + 1, 1, 4]
+    else:
+        new_year_start_date = [current_year - 1, 12, 21]
+        new_year_end_date = [current_year, 1, 4]
 
     mickey_prisoner_jacket = False
 
