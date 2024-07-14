@@ -1,6 +1,25 @@
-﻿init -1 python hide:
+﻿init python early:
+    demo_version = False
+
+    platform = "steam"
+    platforms = {
+        "steam": {
+            "appID": 1450150,
+            "newImage": 1540040
+        },
+        "vk play": {
+            "appID": 2018064,
+            "newImage": 0
+        },
+        "other": {
+            "appID": 0,
+            "newImage": 0
+        }
+    }
+
+init -1 python hide:
     config.name = _("Durka Simulator")
-    config.version = "0.4.2"
+    config.version = "0.4.3"
     build.name = "Durka Simulator"
     gui.show_name = False
 
@@ -9,7 +28,7 @@
     # config.window_icon = "images/misc/icon.png"
     # config.windows_icon = "images/misc/icon.png"
 
-    config.steam_appid = 1450150 # SteamID: 1450150, VK Play: 2018064, GameJolt: 0
+    config.steam_appid = platforms[platform].get("appID", 1450150)
     config.developer = True
     config.skip_indicator = True
     config.has_autosave = True

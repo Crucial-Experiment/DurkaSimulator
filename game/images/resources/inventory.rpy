@@ -11,24 +11,7 @@ init python:
         new_name = server_inventory_img.get(file_name, file_name)
         return new_name
 
-    if steam_running:
-
-        server_data = _steamlib.get_all_items()
-
-        server_inventory_img = {}
-        server_inventory_img["box_small"] = "inv_notebook"
-        server_inventory_img["box_small"] = "inv_notebook"
-        server_inventory_img["knife_small"] = "inv_kitchen_knife"
-        server_inventory_img["moon_small"] = "inv_child_moon"
-        server_inventory_img["prisoner-s-jacket_small"] = "inv_prisoner_jacket"
-        server_inventory_img["remotenuclear_small"] = "inv_remote_control_nuclear_weapons"
-        server_inventory_img["shaver_small"] = "inv_shaver"
-        server_inventory_img["soap_small"] = "inv_household_soap"
-        server_inventory_img["test-had_small"] = "inv_prisoner_hat"
-        server_inventory_img["vodka_small"] = "inv_vodka"
-        server_inventory_img["warden-s-hat_small"] = "inv_warden_hat"
-        server_inventory_img["rose_small"] = "inv_rose"
-
+    '''
     def update_steam_inventory():
 
         for server_item in server_data:
@@ -60,16 +43,10 @@ init python:
 
                     **({"clothes_variable": "mickey_prisoner_jacket"} if server_item.get("id") == "11" else {}),
                     **({"applies_type": "boom"} if server_item.get("id") == "13" else {}),
-                } 
+                }
+    '''
 
-label loading_steam_inventory():
-    if inventory is None:
-        $ inventory = {}
-
-    if steam_running:
-        $ update_steam_inventory()
-
-label add_inv_item(item_id, show_item = True, add_to_steam = False, steam_items_id = None):
+label add_inv_item(item_id, show_item = True):
 
     if item_id["name"] in inventory:
         $ del inventory[item_id["name"]]
@@ -100,17 +77,11 @@ label add_inv_item(item_id, show_item = True, add_to_steam = False, steam_items_
         $ renpy.hide(item_id["sprite"])
         $ renpy.with_statement(dissolve)
 
-    if add_to_steam and steam_running and steam_items_id is not None:
-        $ _steamlib.add_item( steam_items_id )
-
-        $ server_data = _steamlib.get_all_items()
-        $ update_steam_inventory()
-
     return
 
-label remove_item_from_inventory(item_name):
-    if item_name in inventory:
-        $ del inventory[item_name]
+label remove_inv_item(item_id):
+    if item_id["name"] in inventory:
+        $ del inventory[item_id["name"]]
 
 label update_sprite_clothes(var_name = None):
     $ mickey_prisoner_jacket = False

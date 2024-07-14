@@ -133,7 +133,7 @@ label part1_home:
 
     hide mickey_not_happy
     
-    call add_inv_item(inv_notebook_item_id, show_item=True, add_to_steam=False)
+    call add_inv_item(inv_notebook_item_id, show_item=True)
     
     show mickey_happy with dissolve
 
@@ -406,7 +406,7 @@ label part1_home:
 
     show durka_key_card with dissolve
 
-    call add_inv_item(inv_key_card_item_id, show_item=True, add_to_steam=False)
+    call add_inv_item(inv_key_card_item_id, show_item=True)
 
     mickey "Почему она вся в крови?"
 
@@ -818,7 +818,7 @@ label part1_home:
                     hide mickey_thinks
                     with dissolve
                     
-                    call add_inv_item(inv_tea_item_id, show_item=True, add_to_steam=False)
+                    call add_inv_item(inv_tea_item_id, show_item=True)
 
                     show mickey_thinks
                     with dissolve

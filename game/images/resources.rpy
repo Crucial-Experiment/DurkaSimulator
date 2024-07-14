@@ -119,6 +119,10 @@ init 1:
         "images/sprites/mickey/mickey_happy_straitjacket.png"
         zoom 1.1
 
+    image mickey_shouts_straitjacket:
+        "images/sprites/mickey/mickey_shouts_straitjacket.png"
+        zoom 1.1
+
     #Загадочный
     image mysterious_normal:
         ConditionSwitch(

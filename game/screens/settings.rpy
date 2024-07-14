@@ -1,12 +1,13 @@
 init -9 python:
     import steamapi
 
-    is_night_version = True
-
     if not renpy.variant("mobile") and steamapi.Init():
         steam_running = True
-        lang = steamapi.SteamApps().GetCurrentGameLanguage().decode("utf-8")
+        lang = _renpysteam.get_current_game_language()
         print("Steam Game Language: " + lang)
+
+        new_image_dlc = _renpysteam.dlc_installed(platforms[platform].get("newImage", 1540040))
+
         try:
             if lang != "russian":
                 renpy.change_language(lang)
@@ -14,12 +15,10 @@ init -9 python:
                 renpy.change_language(None)
         except:
             print("Unable to update the game language")
-
-        if is_night_version:
-            _steamlib.add_item([2])
-
     else:
         steam_running = False
+        print("The Steam client is not initialized, Steam-related functions are disabled!")
+        print("Open the game via the Steam client to restore the functions!")
 
     languages = {}
     languages["english"] = _("Английский")

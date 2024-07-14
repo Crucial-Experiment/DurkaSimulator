@@ -83,7 +83,7 @@ label part2_home_b1:
     hide mickey_serious
     with dissolve
     
-    call add_inv_item(inv_passport_item_id, show_item=True, add_to_steam=False)
+    call add_inv_item(inv_passport_item_id, show_item=True)
 
     play sound sound_list["picked_up_an_item"]
 

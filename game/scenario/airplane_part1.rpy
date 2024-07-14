@@ -526,4 +526,38 @@ label part1_airplane:
     else:
         mickey "Молодец Микки, опять что-то ляпнул не то... Вот бы сейчас тут был Мокки, он бы точно решил этот вопрос."
 
+    scene black with dissolve
+    center_text "Спустя 20 минут"
+    pause(1.2)
+    scene airport_inside_1_bg
+    show mickey_not_happy at center
+    with dissolve
+
+    show orderly_normal at right
+    with moveinright
+
+    show security_normal at left
+    with moveinleft
+
+    orderly "Гражданин, просим пройти с нами в психушку."
+
+    mickey "Я не псих и поэтому с вами никуда не пойду!"
+
+    security "Давайте уже увозите его отсюда."
+
+    $ battle_character = "orderly"
+    $ battle_label = "psych_hospital_part1"
+    $ orderly_health = 200
+
+    hide security_normal
+    with easeoutleft
+
+    show mickey_not_happy at left with moveinleft
+
+    show screen info_panel
+    show screen info_panel_enemy
+    with dissolve
+
+    jump game_battle
+
     return

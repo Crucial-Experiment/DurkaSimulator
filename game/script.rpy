@@ -14,8 +14,6 @@
 label start:
 
     $ inventory = {}
-    if steam_running:
-        $ update_steam_inventory()
 
     $ mickey_stats = "Неизвестно"
     $ mickey_health = 100
@@ -32,12 +30,6 @@ label start:
             renpy.jump(j)
       
     jump part1_home
-
-    return
-
-label after_load:
-    if steam_running:
-        $ update_steam_inventory()
 
     return
 
