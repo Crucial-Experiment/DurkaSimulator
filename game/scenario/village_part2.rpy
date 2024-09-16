@@ -42,7 +42,7 @@ label part2_village:
 
             $ shaver_killer = True
 
-            call add_inv_item(inv_shaver_item_id, show_item=True)
+            call add_inv_item(inv_shaver_item_id, show_item=True) from _call_add_inv_item_4
 
             mickey "Хм... Его можно использовать как оружие."
 

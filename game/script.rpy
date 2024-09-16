@@ -1,5 +1,4 @@
 ﻿init python early:
-    mods = {} # Моды
     gm_episodes = {} # Эпизоды
     sp_episodes = {} # Спец эпизоды
     endings = 2 # Количество концовок

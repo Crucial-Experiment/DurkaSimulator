@@ -50,7 +50,7 @@ screen navigation():
                 textbutton _("Загрузить") action ShowMenu("load")
 
                 if main_menu and not renpy.variant("mobile"):
-                    textbutton _("Модификации") action ShowMenu("modifications")
+                    textbutton _("DLC") action ShowMenu("dlc_menu")
 
                 #textbutton _("Инвентарь") action ShowMenu("inventory_items")
 

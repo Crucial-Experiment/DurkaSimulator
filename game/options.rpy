@@ -1,5 +1,6 @@
 ﻿init python early:
     demo_version = False
+    new_image_dlc = False
 
     platform = "steam"
     platforms = {
@@ -100,10 +101,12 @@ init python:
     build.executable_name = "DurkaSimulator"
     build.include_update = False
 
-    #build.archive("old_content_pack", "dlc")
-    #build.classify("game/mods/**.rpy", None)
-    #build.classify("game/mods/durka simulator content/**", "old_content_pack")
-    #build.package("DLC", "zip", "dlc", dlc=True)
+    build.archive("new_image", "dlc")
+    build.classify("game/images/sprites/larry_back_mexico.png", "new_image")
+    build.classify("game/images/sprites/larry_mexico.png", "new_image")
+    build.classify("game/images/sprites/mysterious_angry_red.png", "new_image")
+    build.classify("game/images/sprites/mysterious_red.png", "new_image")
+    build.package("DLC", "zip", "dlc", dlc=True)
     
     build.classify('**~', None)
     build.classify('**.bak', None)

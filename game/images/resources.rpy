@@ -63,7 +63,7 @@ init 1:
     #Микки
     image mickey_happy:
         ConditionSwitch(
-            should_show_mdef_sprite(), "images/sprites/mickey/mickey_happy.png",
+            should_show_mdef_sprite(), If(new_image_dlc, "images/sprites/mickey/event/mickey_happy_prison.png", "images/sprites/mickey/mickey_happy.png"),
             should_show_minv_sprite("Prisoner's Jacket"), "images/sprites/mickey/event/mickey_happy_prison.png",
             "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mickey/event/mickey_happy_yn.png",
             fit=True
@@ -72,7 +72,7 @@ init 1:
 
     image mickey_not_happy:
         ConditionSwitch(
-            should_show_mdef_sprite(), "images/sprites/mickey/mickey_not_happy.png",
+            should_show_mdef_sprite(), If(new_image_dlc, "images/sprites/mickey/event/mickey_not_happy_prison.png", "images/sprites/mickey/mickey_not_happy.png"),
             should_show_minv_sprite("Prisoner's Jacket"), "images/sprites/mickey/event/mickey_not_happy_prison.png",
             "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mickey/event/mickey_not_happy_yn.png",
             fit=True
@@ -81,7 +81,7 @@ init 1:
 
     image mickey_serious:
         ConditionSwitch(
-            should_show_mdef_sprite(), "images/sprites/mickey/mickey_serious.png",
+            should_show_mdef_sprite(), If(new_image_dlc, "images/sprites/mickey/event/mickey_serious_prison.png", "images/sprites/mickey/mickey_serious.png"),
             should_show_minv_sprite("Prisoner's Jacket"), "images/sprites/mickey/event/mickey_serious_prison.png",
             "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mickey/event/mickey_serious_yn.png",
             fit=True
@@ -90,7 +90,7 @@ init 1:
 
     image mickey_shouts:
         ConditionSwitch(
-            should_show_mdef_sprite(), "images/sprites/mickey/mickey_shouts.png",
+            should_show_mdef_sprite(), If(new_image_dlc, "images/sprites/mickey/event/mickey_shouts_prison.png", "images/sprites/mickey/mickey_shouts.png"),
             should_show_minv_sprite("Prisoner's Jacket"), "images/sprites/mickey/event/mickey_shouts_prison.png",
             "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mickey/event/mickey_shouts_yn.png",
             fit=True
@@ -99,7 +99,7 @@ init 1:
 
     image mickey_thinks:
         ConditionSwitch(
-            should_show_mdef_sprite(), "images/sprites/mickey/mickey_thinks.png",
+            should_show_mdef_sprite(), If(new_image_dlc, "images/sprites/mickey/event/mickey_thinks_prison.png", "images/sprites/mickey/mickey_thinks.png"),
             should_show_minv_sprite("Prisoner's Jacket"), "images/sprites/mickey/event/mickey_thinks_prison.png",
             "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mickey/event/mickey_thinks_yn.png",
             fit=True
@@ -108,7 +108,7 @@ init 1:
 
     image mickey_back:
         ConditionSwitch(
-            should_show_mdef_sprite(), "images/sprites/mickey/mickey_back.png",
+            should_show_mdef_sprite(), If(new_image_dlc, "images/sprites/mickey/event/mickey_back_prison.png", "images/sprites/mickey/mickey_back.png"),
             should_show_minv_sprite("Prisoner's Jacket"), "images/sprites/mickey/event/mickey_back_prison.png",
             "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mickey/event/mickey_back_yn.png",
             fit=True
@@ -126,7 +126,7 @@ init 1:
     #Загадочный
     image mysterious_normal:
         ConditionSwitch(
-            "not is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mysterious.png",
+            "not is_event_sprite(new_year_start_date, new_year_end_date)", If(new_image_dlc, "images/sprites/mysterious_red.png", "images/sprites/mysterious.png"),
             "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mysterious_yn.png",
             fit=True
         )
@@ -134,7 +134,7 @@ init 1:
 
     image mysterious_angry:
         ConditionSwitch(
-            "not is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mysterious_angry.png",
+            "not is_event_sprite(new_year_start_date, new_year_end_date)", If(new_image_dlc, "images/sprites/mysterious_angry_red.png", "images/sprites/mysterious_angry.png"),
             "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/mysterious_angry_yn.png",
             fit=True
         )
@@ -210,14 +210,14 @@ init 1:
 
     #Остальные
     image larry_normal:
-        "images/sprites/larry.png"
+        If(new_image_dlc, "images/sprites/larry_mexico.png", "images/sprites/larry.png"),
         zoom 1.1
     image larry_back:
-        "images/sprites/larry_back.png"
+        If(new_image_dlc, "images/sprites/larry_back_mexico.png", "images/sprites/larry_back.png"),
         zoom 1.1
     image orderly_normal:
         ConditionSwitch(
-            "not is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/orderly.png",
+            "not is_event_sprite(new_year_start_date, new_year_end_date)", If(new_image_dlc, "images/sprites/orderly_black.png.png", "images/sprites/orderly.png.png"),
             "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/orderly_yn.png",
             fit=True
         )

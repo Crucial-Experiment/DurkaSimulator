@@ -29,8 +29,8 @@ label psych_hospital_part1:
     show mickey_shouts_straitjacket at left
     with dissolve
 
-    call remove_inv_item(inv_key_card_item_id)
-    call remove_inv_item(inv_shaver_item_id)
+    call remove_inv_item(inv_key_card_item_id) from _call_remove_inv_item
+    call remove_inv_item(inv_shaver_item_id) from _call_remove_inv_item_1
 
     $ renpy.notify("У вас забрали некоторые предметы из инвентаря")
 
@@ -38,5 +38,10 @@ label psych_hospital_part1:
     durka "Я уже думал, за тобой придется отправлять целый отряд."
 
     mickey "Что вам от меня нужно!?"
+
+    scene black with dissolve
+    center_text "Конец демо-версии эпизода\nОжидайте следующих обновлений"
+
+    # durka ""
 
     return
