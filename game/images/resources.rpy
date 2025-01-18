@@ -55,6 +55,7 @@ init 1:
     define rigagent = Character('Агент по регестрации', color="#c8ffc8")
     define kolya = Character('Коля', color="#c8ffc8")
     define stewardess = Character('Стюардесса', color="#c8ffc8")
+    define escapedurka = Character('Матвей', color="#c8ffc8")
 
     # Загрузка изображений
 
@@ -118,9 +119,20 @@ init 1:
     image mickey_happy_straitjacket:
         "images/sprites/mickey/mickey_happy_straitjacket.png"
         zoom 1.1
-
+    image mickey_back_straitjacket:
+        "images/sprites/mickey/mickey_back_straitjacket.png"
+        zoom 1.1
     image mickey_shouts_straitjacket:
         "images/sprites/mickey/mickey_shouts_straitjacket.png"
+        zoom 1.1
+    image mickey_not_happy_straitjacket:
+        "images/sprites/mickey/mickey_not_happy_straitjacket.png"
+        zoom 1.1
+    image mickey_serious_straitjacket:
+        "images/sprites/mickey/mickey_serious_straitjacket.png"
+        zoom 1.1
+    image mickey_thinks_straitjacket:
+        "images/sprites/mickey/mickey_thinks_straitjacket.png"
         zoom 1.1
 
     #Загадочный
@@ -217,7 +229,7 @@ init 1:
         zoom 1.1
     image orderly_normal:
         ConditionSwitch(
-            "not is_event_sprite(new_year_start_date, new_year_end_date)", If(new_image_dlc, "images/sprites/orderly_black.png.png", "images/sprites/orderly.png.png"),
+            "not is_event_sprite(new_year_start_date, new_year_end_date)", If(new_image_dlc, "images/sprites/orderly_black.png", "images/sprites/orderly.png"),
             "is_event_sprite(new_year_start_date, new_year_end_date)", "images/sprites/orderly_yn.png",
             fit=True
         )
@@ -236,7 +248,7 @@ init 1:
         "images/sprites/security.png"
         zoom 1.1
     image justapasserby_normal:
-        "images/sprites/justapasserby.png"
+        If(new_image_dlc, "images/sprites/justapasserby_ilovece.png", "images/sprites/justapasserby.png"),
         zoom 1.1
     image cashier_normal:
         "images/sprites/cashier.png"
@@ -255,6 +267,9 @@ init 1:
         zoom 1.1
     image stewardess_normal:
         "images/sprites/stewardess.png"
+        zoom 1.1
+    image escapedfromdurka_normal:
+        "images/sprites/escapedfromdurka.png"
         zoom 1.1
 
     #Предметы
@@ -292,16 +307,37 @@ init 1:
         xalign 0.5
         yalign 0.5
         zoom 0.2
+    image mickey_iron_tag:
+        "images/items/iron_tag.png"
+        xalign 0.5
+        yalign 0.5
+        zoom 0.2
 
     #Фоны
-    image redsquare_bg = "images/backgrounds/redsquare.jpg"
-    image mickey_home_bg = "images/backgrounds/mickey_home.png"
-    image mickey_home2_bg = "images/backgrounds/mickey_home2.png"
+    image redsquare_bg:
+        ConditionSwitch(
+            "not is_event_sprite(new_year_start_date, new_year_end_date)", "images/backgrounds/redsquare.jpg",
+            "is_event_sprite(new_year_start_date, new_year_end_date)", "images/backgrounds/redsquare_yn.jpg",
+            fit=True
+        )
+    image mickey_home_bg:
+        ConditionSwitch(
+            "not is_event_sprite(new_year_start_date, new_year_end_date)", "images/backgrounds/mickey_home.png",
+            "is_event_sprite(new_year_start_date, new_year_end_date)", "images/backgrounds/mickey_home_yn.png",
+            fit=True
+        )
+    image mickey_home2_bg:
+        ConditionSwitch(
+            "not is_event_sprite(new_year_start_date, new_year_end_date)", "images/backgrounds/mickey_home2.png",
+            "is_event_sprite(new_year_start_date, new_year_end_date)", "images/backgrounds/mickey_home2_yn.png",
+            fit=True
+        )
     image college_admissions_bg = "images/backgrounds/college_admissions.png"
     image school_bg = "images/backgrounds/school.png"
     image forest_bg = "images/backgrounds/forest.png"
     image durka_base_bg = "images/backgrounds/durka_base.png"
     image durka_base_2_bg = "images/backgrounds/durka_base_2.png"
+    image durka_base_3_bg = "images/backgrounds/durka_base_3.jpg"
     image mysterious_base_bg = "images/backgrounds/zagadochnuy_base.png"
     image mysterious_base_armory_bg = "images/backgrounds/zagadochnuy_armory_room.png"
     image street_bg = "images/backgrounds/street.png"
@@ -310,7 +346,7 @@ init 1:
     image trapping_bg = "images/backgrounds/trapping.jpg"
     image minibus_bg = "images/backgrounds/minibus.jpg"
     image bus_bg = "images/backgrounds/bus.png"
-    image bus_inside_bg = "images/backgrounds/bus_inside.jpg"
+    image bus_inside_bg = "images/backgrounds/bus_inside.png"
     image bus_inside_c1_bg = "images/backgrounds/bus_inside_c1.png"
     image bus_inside_c2_bg = "images/backgrounds/bus_inside_c2.png"
     image l_dn_bg = "images/l_dn.png"
@@ -422,3 +458,5 @@ init 1:
     $ sound_list["airplane_takeoff"] = "sound/audio/airplane_takeoff.mp3"
     $ sound_list["inside_airplane"] = "sound/audio/inside_airplane.mp3"
     $ sound_list["slap"] = "sound/audio/slap.mp3"
+    $ sound_list["closing_metal_door"] = "sound/audio/closing_metal_door.mp3"
+    $ sound_list["turning_off_light"] = "sound/audio/turning_off_light.mp3"

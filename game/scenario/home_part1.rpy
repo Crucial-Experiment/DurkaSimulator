@@ -1,5 +1,8 @@
 label part1_home:
 
+    if new_image_dlc:
+        call add_inv_item(inv_rose_item_id, show_item=False) from _call_add_inv_item_5
+
     scene redsquare_bg
 
     if config.steam_appid == 0 and persistent.name and persistent.token:

@@ -174,6 +174,25 @@ label part1_village:
                 $ achievement.grant("Ricroll")
                 $ achievement.sync()
 
+        "Номер 5" if is_event_sprite(new_year_start_date, new_year_end_date):
+            mysterious "Теперь надо найти это видео."
+
+            "Ищет видеоролик."
+
+            mysterious "Нашел."
+
+            mickey "Ну показывай."
+
+            scene black with dissolve
+
+            $ renpy.movie_cutscene("video/new_year_yes_and_no.webm")
+
+            if config.steam_appid == 0 and persistent.name and persistent.token:
+                $ GameJoltAPI.addAchieved(253084)
+            else:
+                $ achievement.grant("ThereWillBeNoNewYear")
+                $ achievement.sync()
+
     scene bus_inside_c2_bg with dissolve
 
     mickey "..."

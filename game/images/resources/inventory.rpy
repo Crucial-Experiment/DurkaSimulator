@@ -96,6 +96,7 @@ image inv_passport = im.Scale("images/items/passport.png", 64, 64)
 image inv_key_card = im.Scale("images/items/key_card.png", 64, 64)
 image inv_bible = im.Scale("images/items/bible.png", 64, 64)
 image inv_tea = im.Scale("images/items/tea.png", 64, 64)
+image inv_iron_tag = im.Scale("images/items/iron_tag.png", 64, 64)
 
 image inv_child_moon = im.Scale("images/items/steam_inv/Child of the Moon.png", 64, 64)
 image inv_kitchen_knife = im.Scale("images/items/steam_inv/Kitchen Knife.png", 64, 64)
@@ -170,5 +171,29 @@ init python early:
 
         "message": _("Получена 1 книга с библией."),
         "sprite": "mickey_bible",
+        "sound": "picked_up_an_item"
+    }
+
+    inv_rose_item_id = {
+        "name": _("Роза"),
+        "description": _("Спасибо, что приобрели DLC «Новый образ»!"),
+        "icon": "inv_rose",
+
+        "use": True,
+        "use_type": "health",
+        "use_description": "Восстанавливает 5-10 единиц здоровья",
+
+        "message": _("Получена 1 роза."),
+        "sprite": "inv_rose",
+        "sound": "picked_up_an_item"
+    }
+
+    inv_iron_tag_item_id = {
+        "name": _("Железная бирка"),
+        "description": _("Ваша личная бирка, теперь вы официально бальной."),
+        "icon": "inv_iron_tag",
+
+        "message": _("Получена 1 железная бирка."),
+        "sprite": "mickey_iron_tag",
         "sound": "picked_up_an_item"
     }

@@ -95,6 +95,13 @@ label splashscreen:
 
     scene black with fade
 
+    if is_event_sprite(new_year_start_date, new_year_end_date):
+        if config.steam_appid == 0 and persistent.name and persistent.token:
+            $ GameJoltAPI.addAchieved(253083)
+        else:
+            $ achievement.grant("HappyNewYearMickey")
+            $ achievement.sync()
+
     if config.steam_appid == 0 and not persistent.name and not persistent.token:
 
         call screen gamejolt_start_screen

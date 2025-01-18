@@ -10,7 +10,7 @@
         },
         "vk play": {
             "appID": 2018064,
-            "newImage": 0
+            "newImage": 40202
         },
         "other": {
             "appID": 0,
@@ -20,14 +20,14 @@
 
 init -1 python hide:
     config.name = _("Durka Simulator")
-    config.version = "0.4.3"
+    config.version = "0.5.0"
     build.name = "Durka Simulator"
     gui.show_name = False
 
     ## Дополнительные настройки окна
     config.default_fullscreen = False
-    # config.window_icon = "images/misc/icon.png"
-    # config.windows_icon = "images/misc/icon.png"
+    config.window_icon = "gui/window_icon.png"
+    config.windows_icon = "gui/window_icon.png"
 
     config.steam_appid = platforms[platform].get("appID", 1450150)
     config.developer = True
@@ -79,20 +79,22 @@ init:
     $ achievement.register("DancingPirate") # Танцующий пират
     $ achievement.register("Ricroll") # Рикролл
     $ achievement.register("LThisIsMe") # L это я
-    $ achievement.register("DeathNote") # Тетрадь смерти
+    # $ achievement.register("DeathNote") # Тетрадь смерти
     $ achievement.register("SweeneyTodd") # Суини Тодд
     $ achievement.register("FirstBlood") # Первая кровь
-    $ achievement.register("BiblicalMurder") # Библейское убийство
-    $ achievement.register("LovePineapple") # Люблю Ананасы
-    $ achievement.register("MiraclesAch") # Чудеса
+    # $ achievement.register("BiblicalMurder") # Библейское убийство
+    # $ achievement.register("LovePineapple") # Люблю Ананасы
+    # $ achievement.register("MiraclesAch") # Чудеса
     $ achievement.register("MickeyDead") # Микки умер
-    $ achievement.register("MeatGrinder") # Мясорубка в доме Микки, при получение паспорта
+    # $ achievement.register("MeatGrinder") # Мясорубка в доме Микки, при получение паспорта
     $ achievement.register("WelcomeToPlane") # Добро пожаловать в самолет
     $ achievement.register("WelcomeToCommunity") # Добро пожаловать в сообщество (Discord)
     $ achievement.register("StrayBullet") # Шальная пуля
-    $ achievement.register("INotHuman") # Я не человек
-    $ achievement.register("Creators") # Создатели
+    # $ achievement.register("INotHuman") # Я не человек
+    # $ achievement.register("Creators") # Создатели
     $ achievement.register("ILoveDeath") # Я люблю смерть
+    $ achievement.register("HappyNewYearMickey") # Счастливого нового года, Микки
+    $ achievement.register("ThereWillBeNoNewYear") # Нового года не будет
 
     $ achievement.sync()
 
@@ -106,6 +108,7 @@ init python:
     build.classify("game/images/sprites/larry_mexico.png", "new_image")
     build.classify("game/images/sprites/mysterious_angry_red.png", "new_image")
     build.classify("game/images/sprites/mysterious_red.png", "new_image")
+    build.classify("game/images/sprites/justapasserby_ilovece.png", "new_image")
     build.package("DLC", "zip", "dlc", dlc=True)
     
     build.classify('**~', None)

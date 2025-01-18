@@ -5,15 +5,15 @@
 init python:
     config.hyperlink_handlers['steam_web_overlay'] = _renpysteam.activate_overlay_to_web_page
 
-    if not renpy.variant("mobile"):
-        _steamlib.steam_init()
+    #if not renpy.variant("mobile"):
+    #    _steamlib.steam_init()
 
 init -1499 python in _steamlib:
 
     import steamapi, ctypes, time
 
-    def steam_init():
-        return steamapi.Init()
+    # def steam_init():
+    #    return steamapi.Init()
 
     # SteamUtils
 

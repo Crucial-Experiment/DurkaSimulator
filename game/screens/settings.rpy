@@ -1,7 +1,7 @@
 init -9 python:
     import steamapi
 
-    if not renpy.variant("mobile") and steamapi.Init():
+    if not renpy.variant("mobile"):
         steam_running = True
         lang = _renpysteam.get_current_game_language()
         print("Steam Game Language: " + lang)
